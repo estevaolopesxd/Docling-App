@@ -43,7 +43,7 @@ export default function DoclingConverter() {
       setConvertedMarkdown(md);
       setConvertedJSON(data.json || null);
 
-      // >>> Envia o markdown para o backend e recebe um docId curto
+      
       const resStore = await fetch("http://localhost:8000/store", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ export default function DoclingConverter() {
       const { id } = await resStore.json();
       setDocId(id);
 
-      // Armazena no localStorage
+     
       localStorage.setItem(id, md);
 
       if (md) setShowChatModal(true);
@@ -72,20 +72,19 @@ const sendMessage = async () => {
   setAsking(true);
 
   try {
-    // ✅ Garante que o markdown esteja sendo lido corretamente
     const markdown = localStorage.getItem(docId);
     if (!markdown) {
       throw new Error("O conteúdo do documento não foi encontrado no localStorage.");
     }
 
-    // ✅ Envia conteúdo como parte do corpo JSON
+    
     const response = await fetch("https://n8n.memt.com.br/webhook-test/637af59b-a97b-450b-8d15-52607b2d6aa5", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         docId,
         pergunta: userMsg.text,
-        conteudo: markdown, // ✅ envio do conteúdo aqui
+        conteudo: markdown, 
       }),
     });
 
