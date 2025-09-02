@@ -34,7 +34,7 @@ export default function DoclingConverter() {
 
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8000/convert", {
+      const response = await fetch("https://doclingapi.memt.com.br/convert", {
         method: "POST",
         body: formData,
       });
@@ -44,7 +44,7 @@ export default function DoclingConverter() {
       setConvertedJSON(data.json || null);
 
       
-      const resStore = await fetch("http://localhost:8000/store", {
+      const resStore = await fetch("https://doclingapi.memt.com.br/store", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ markdown: md }),
@@ -78,7 +78,7 @@ const sendMessage = async () => {
     }
 
     
-    const response = await fetch("https://n8n.memt.com.br/webhook-test/637af59b-a97b-450b-8d15-52607b2d6aa5", {
+    const response = await fetch("https://n8n.memt.com.br/webhook/637af59b-a97b-450b-8d15-52607b2d6aa5", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
